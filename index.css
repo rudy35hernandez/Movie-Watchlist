@@ -1,0 +1,72 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+#body-container{
+    display: flex;
+    flex-direction: column;
+    max-width: 80%;
+    justify-content: center;
+    margin: 0 auto
+}
+
+
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: solid 1px;
+    padding: 30px;
+    height: 30vh;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 100%), url("./images/movie-posters.webp");
+    background-position: center;
+    color: white;
+}
+
+header h1{
+    margin: 0;
+    font-size: 50px;
+    font-weight: 800;
+}
+
+header a{
+    color: white;
+    text-decoration: none;
+    font-size: 25px;
+}
+
+form{
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    margin-top: -1%;
+    width: 100%
+}
+
+#movie-search{
+    padding: 5px;
+    width: 70%
+}
+
+#search-btn{
+    width: 12%
+}
+
+/****** Movie list ************/
+
+#movie-list{
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+}
+
+.movie{
+    display: flex;
+    margin: 50px 0;
+}
+
+.movie-poster{
+    width: 99px;
+}
