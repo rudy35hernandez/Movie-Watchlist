@@ -1,40 +1,41 @@
+import { addList } from './index.js'
+
+
+
+
+
+
 const apiKey = "c14ca80c"
 let movie = document.getElementById("movie-search")
 let addList = []
 let movieArray = []
-    
+
+
+
 document.getElementById("search").addEventListener("submit", async function(e){
     e.preventDefault()
-    // let html = ""
-    const res = await fetch(`https://www.omdbapi.com/?s=${movie.value}&apikey=${apiKey}`)
+    let html = ""
+    const res = await fetch(`http://www.omdbapi.com/?s=${movie.value}&apikey=${apiKey}`)
     const data = await res.json()    
 
             for(let i = 0; i < data.Search.length; i++){
                 movieArray.push(data.Search[i].imdbID)
 
             }
-            // console.log(movieArray)
-    render()
-})
+            console.log(movieArray)
+
          
-            
-
-
-    
-    
-    
-function render(){
         let movieId;
-        let html = ""  
+            
             Promise.all(
                 movieArray.map(movie => 
-                    fetch(`https://www.omdbapi.com/?i=${movie}&apikey=${apiKey}`)
+                    fetch(`http://www.omdbapi.com/?i=${movie}&apikey=${apiKey}`)
                     .then(res => res.json())
                     .catch(err => console.log(err)))   
                     ).then(movies => {
                         // console.log(movies)
                         for(let i = 0; i < movies.length; i++){
-                            console.log(movies[i].Title) 
+                            // console.log(movies[i]) 
                             if(movies[i].Ratings.length > 0){
                                 
                                 html += `
@@ -78,6 +79,26 @@ function render(){
                         }
                         
                 document.getElementById("movie-list").innerHTML = html
-        })
-    movieArray = []
-}
+                let addMovieBtn = document.querySelectorAll(".add-movie")
+            
+                for(let i = 0; i < addMovieBtn.length; i++){
+                    addMovieBtn[i].addEventListener("click", function(e){
+                        e.preventDefault()
+                        if(!addList.includes(addMovieBtn[i].id)){
+                            addList.push(addMovieBtn[i].id)
+                            localStorage.setItem("movieIds", JSON.stringify(addList))
+                        }
+                        console.log(addList)
+                    })
+
+                }
+            })
+                movieArray = []
+    })
+
+
+    
+    addList = JSON.parse(localStorage.getItem("movieIds"))
+    console.log(addList)
+
+export {addList}
