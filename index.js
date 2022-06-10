@@ -2,6 +2,7 @@ const apiKey = "c14ca80c"
 let movie = document.getElementById("movie-search")
 let addList = []
 let movieArray = []
+
     
 document.getElementById("search").addEventListener("submit", async function(e){
     e.preventDefault()
@@ -76,8 +77,19 @@ function render(){
                                 `
                             }
                         }
-                        
+                       
                 document.getElementById("movie-list").innerHTML = html
+        
+                let addMovieBtn = document.querySelectorAll(".add-movie")
+                
+                for(let button of addMovieBtn){
+                    button.addEventListener("click", function(e){
+                        e.preventDefault()
+                        console.log("clicked!")
+                    })
+                }
         })
     movieArray = []
+   
 }
+
