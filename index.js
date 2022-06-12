@@ -2,21 +2,25 @@ const apiKey = "c14ca80c"
 let movie = document.getElementById("movie-search")
 let addList = []
 let movieArray = []
+let addMovieBtn;
+const searchBtn = document.getElementById("search")
 
+if(searchBtn){
+
+    searchBtn.addEventListener("submit", async function(e){
+        e.preventDefault()
+        // let html = ""
+        const res = await fetch(`https://www.omdbapi.com/?s=${movie.value}&apikey=${apiKey}`)
+        const data = await res.json()    
     
-document.getElementById("search").addEventListener("submit", async function(e){
-    e.preventDefault()
-    // let html = ""
-    const res = await fetch(`https://www.omdbapi.com/?s=${movie.value}&apikey=${apiKey}`)
-    const data = await res.json()    
-
-            for(let i = 0; i < data.Search.length; i++){
-                movieArray.push(data.Search[i].imdbID)
-
-            }
-            // console.log(movieArray)
-    render()
-})
+                for(let i = 0; i < data.Search.length; i++){
+                    movieArray.push(data.Search[i].imdbID)
+    
+                }
+                // console.log(movieArray)
+        render()
+    })
+}
          
             
 
@@ -80,16 +84,40 @@ function render(){
                        
                 document.getElementById("movie-list").innerHTML = html
         
-                let addMovieBtn = document.querySelectorAll(".add-movie")
-                
-                for(let button of addMovieBtn){
-                    button.addEventListener("click", function(e){
-                        e.preventDefault()
-                        console.log("clicked!")
-                    })
-                }
+                addMovieBtn = document.querySelectorAll(".add-movie")
+                addMovie()
+                // for(let button of addMovieBtn){
+                //     button.addEventListener("click", function(e){
+                //         e.preventDefault()
+                //         console.log(button.id)
+                //         addList.push(button.id)
+                //         console.log(addList)
+                //     })
+                // }
         })
     movieArray = []
    
 }
 
+
+function addMovie(){
+
+    for(let button of addMovieBtn){
+        button.addEventListener("click", function(e){
+            e.preventDefault()
+            console.log(button.id)
+            if(!addList.includes(button.id)){
+                addList.push(button.id)
+                localStorage.setItem("movieIds", JSON.stringify(addList))
+            }
+        })
+    }
+}
+
+addList = JSON.parse(localStorage.getItem("movieIds"))
+
+console.log(addList)
+
+// console.log(addList)
+
+export {addList, apiKey}
