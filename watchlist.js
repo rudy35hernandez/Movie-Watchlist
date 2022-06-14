@@ -74,6 +74,7 @@ function removeMovie(){
                 addList.splice(index, 1)
                 localStorage.setItem("movieIds", JSON.stringify(addList))
                 console.log(addList)
+                render2()
             }
         })
     }

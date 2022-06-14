@@ -84,7 +84,8 @@ header a{
 
 /****** Movie list ************/
 
-#movie-list{
+#movie-list,
+#movie-watchlist{
     display: flex;
     flex-direction: column;
     width: 80%;
@@ -138,10 +139,24 @@ h2.movie-title{
 }
 
 
-.add-movie{
+.add-movie,
+.remove-movie{
     color: white;
     text-decoration: none;
 
+}
+
+.add-movie:hover,
+.remove-movie:hover{
+    font-size: 14px
+}
+
+.add-movie:hover{
+    font-weight: bolder
+}
+
+.remove-movie:hover{
+    color: red
 }
 
 .movie-plot{

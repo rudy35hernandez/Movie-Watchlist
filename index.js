@@ -8,6 +8,7 @@ const searchBtn = document.getElementById("search")
 if(searchBtn){
 
     searchBtn.addEventListener("submit", async function(e){
+        
         e.preventDefault()
         // let html = ""
         const res = await fetch(`https://www.omdbapi.com/?s=${movie.value}&apikey=${apiKey}`)
@@ -18,7 +19,9 @@ if(searchBtn){
     
                 }
                 // console.log(movieArray)
+        
         render()
+        
     })
 }
          
@@ -29,7 +32,8 @@ if(searchBtn){
     
     
 function render(){
-        let movieId;
+        movie.placeholder = `${movie.value}`
+        movie.value = ""
         let html = ""  
             Promise.all(
                 movieArray.map(movie => 
@@ -109,6 +113,7 @@ function addMovie(){
             if(!addList.includes(button.id)){
                 addList.push(button.id)
                 localStorage.setItem("movieIds", JSON.stringify(addList))
+                
             }
         })
     }
